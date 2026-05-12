@@ -243,7 +243,7 @@ DELETE FROM product_units
 WHERE product_id = 7 AND snapshot_timestamp = (
         SELECT MIN(snapshot_timestamp)
         FROM product_units
-        WHERE product_id = 7)
+        WHERE product_id = 7);
 
 --END QUERY
 
