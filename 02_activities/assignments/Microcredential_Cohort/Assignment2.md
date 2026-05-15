@@ -56,7 +56,32 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Type 1 SCD - Overwrites old data with new information: 
+When a customer updates their address, we overwrite the existing record with the new address.  
+
+CUSTOMER_ADDRESS table will include:
+- customer_id (Primary Key)
+- street_address
+- province
+- country
+- zip_code
+- updated_at --> to keep record of when it was last changed
+
+Type 2 SCD - creates a new record, whie retaining the old record 
+When a customer changes their address, the new address creates a new individual row added into the database. The old address will be kept but deemed FALSE in 'current', which shows whether it is the current address or not.
+
+CUSTOMER_ADDRESS table will include:
+- customer_id (Primary Key)
+- street_address
+- province
+- country
+- zip_code
+- current (Boolean)
+- start_date --> to show when the record was added, and could be useful in filtering
+
+Depending on how the record will be used, both type 1 and 2 can be used by the bookstore
+Type 1 for the bookstore tp use less storage and if they only care about the current address.  
+Type 2 for if they want to know where a customer lived at the time of past orders, analyding data by delivery address etc.
 ```
 
 ***
